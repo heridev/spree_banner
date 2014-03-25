@@ -13,9 +13,10 @@ Gem::Specification.new do |s|
   s.files        = Dir['CHANGELOG', 'README.md', 'LICENSE', 'lib/**/*', 'app/**/*', 'db/**/*', 'config/**/*']
   s.require_path = 'lib'
   s.requirements << 'none'
-  
+
   s.add_dependency 'spree_core', '>= 2.0.0'
   s.add_dependency 'paperclip'
+  s.add_dependency 'sass-rails', '~> 4.0.2'
   s.add_dependency 'aws-sdk'
 end
 

@@ -1,0 +1,78 @@
+@import 'variables';
+
+.box-container {
+  margin: 0 auto;
+  width: 1024px;
+
+  .box {
+    position: absolute;
+    display: inline;
+    width: 220px;
+
+    img {
+      width: 100%;
+    }
+
+    &.dbl-lg {
+      width: 440px;
+    }
+  }
+  #box-one{
+    @include left_top_position(0px, 0px);
+  }
+  #box-one-text{
+    @include left_top_position(219px, 0px);
+  }
+  #box-two {
+    @include left_top_position(440px, 0px);
+  }
+  #box-three {
+    @include left_top_position(660px, 0px);
+  }
+  #box-four {
+    @include left_top_position(440px, 110px);
+  }
+  #box-five {
+    @include left_top_position(0px, 220px);
+  }
+  #box-six {
+    @include left_top_position(220px, 220px);
+  }
+  #box-seven {
+    @include left_top_position(0px, 330px);
+  }
+  #box-eight {
+    @include left_top_position(220px, 440px);
+  }
+  #box-two-text{
+    @include left_top_position(0px, 440px);
+  }
+  #box-nine {
+    @include left_top_position(660px, 440px);
+  }
+  #box-three-text {
+    @include left_top_position(440px, 440px);
+  }
+  #box-ten {
+    @include left_top_position(0px, 660px);
+  }
+  #box-eleven {
+    @include left_top_position(220px, 660px);
+  }
+  #box-twelve {
+    @include left_top_position(660px, 660px);
+  }
+  #box-thirteen {
+    @include left_top_position(0px, 880px);
+  }
+  #box-four-text {
+    @include left_top_position(220px, 880px);
+  }
+  #box-fourteen {
+    @include left_top_position(440px, 880px);
+  }
+  #box-five-text {
+    @include left_top_position(660px, 880px);
+  }
+}
+

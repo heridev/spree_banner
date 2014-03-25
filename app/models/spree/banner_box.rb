@@ -5,9 +5,10 @@ module Spree
                 :url  => "/spree/banners/:id/:style_:basename.:extension",
                 :path => ":rails_root/public/spree/banners/:id/:style_:basename.:extension",
                 :styles => lambda {|a|{
-                  :mini => "48x48>",
-                  :small => "100x100>",
-                  :large => "800x200#",
+                  :double => "640x320>",
+                  :big_right => "320x640>",
+                  :medium => "320x321>",
+                  :small => "320x160#",
                   :custom => "#{a.instance.attachment_width}x#{a.instance.attachment_height}#"
                 }},
                 :convert_options => { :all => '-strip -auto-orient' }
@@ -79,6 +80,10 @@ module Spree
 
     def self.categories_for_select
       unscoped.pluck(:category).uniq.sort
+    end
+
+    def self.find_by_category_name name
+      Spree::BannerBox.find_by(category: name)
     end
 
   end

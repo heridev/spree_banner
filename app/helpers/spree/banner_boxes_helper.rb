@@ -32,5 +32,21 @@ module Spree
       end
     end
 
+    def insert_banner_box_by_name name, style
+      banner = Spree::BannerBox.find_by_category_name(name)
+      link_to (banner.url.blank? ? "javascript: void(0)" : banner.url) do
+        src = banner.attachment.url(style.to_sym)
+        image_tag(banner.attachment.url(style.to_sym), :alt => banner.alt_text.presence || image_alt(src))
+      end
+    end
+
+    def image_category_link name, style
+      banner = Spree::BannerBox.find_by_category_name(name)
+      link_to (edit_box_by_category_admin_banner_boxes_path(name: name)) do
+        src = banner.attachment.url(style.to_sym)
+        image_tag(banner.attachment.url(style.to_sym), :alt => banner.alt_text.presence || image_alt(src))
+      end
+    end
   end
 end
+

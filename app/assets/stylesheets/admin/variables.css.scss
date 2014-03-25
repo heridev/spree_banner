@@ -1,0 +1,6 @@
+/*mixins *****************************/
+
+@mixin left_top_position($left, $top) {
+  left: $left;
+  top: $top;
+}

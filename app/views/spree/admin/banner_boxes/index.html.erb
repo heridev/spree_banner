@@ -14,46 +14,7 @@
 
 <%= render :partial => 'spree/admin/shared/banner_box_sub_menu' %>
 
-<% content_for :table_filter_title do %>
-  <%= Spree.t(:search) %>
-<% end %>
-
-<% content_for :table_filter do %>
-  <div data-hook="admin_banner_sidebar">
-
-    <%= search_form_for [:admin, @search] do |f| %>
-        <%- locals = {:f => f} %>
-        <div data-hook="admin_banner_index_search">
-          <div class="alpha four columns">
-            <div class="field">
-              <%= f.label :category_eq, Spree.t(:category) %>
-              <%= f.select :category_eq, Spree::BannerBox.categories_for_select, {:include_blank => true}, {:class => 'select2 fullwidth'} %>
-            </div>
-          </div>
-          <div class="eight columns">
-            <div class="field">
-              <%= f.label :url_cont, Spree.t(:url) %>
-              <%= f.text_field :url_cont, :size => 15 %>
-            </div>
-          </div>
-          <div class="three columns omega">
-            <div class="field checkbox">
-              <label>
-                <%= f.check_box :enabled_true %>
-                <%= Spree.t(:show_only_enabled) %>
-              </label>
-            </div>
-        </div>
-
-        <div class="clear"></div>
-
-        <div class="form-buttons actions filter-actions" data-hook="admin_banner_index_search_buttons">
-          <%= button Spree.t(:search), 'icon-search' %>
-        </div>
-    <% end %>
-  </div>
-<% end %>
-
+<%= render :partial => 'spree/admin/banner_boxes/manage_banners' %>
 
 <div id="new_banner_box" data-hook></div>
 
@@ -80,7 +41,7 @@
     <td class="no-border">
       <span class="handle"></span>
     </td>
-    <td class="align-center"><%= image_tag(banner_box.attachment(:mini)) %></td>
+    <td class="align-center"><%= image_tag(banner_box.attachment(:small)) %></td>
     <td class="align-center"><%= banner_box.category rescue '' %></td>
     <td class="align-center"><%= banner_box.url rescue '' %></td>
     <td class="actions" data-hook="admin_banner_index_row_actions">
