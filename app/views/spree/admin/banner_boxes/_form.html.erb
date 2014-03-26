@@ -1,20 +1,57 @@
 <div data-hook="admin_banner_box_form_fields" class="row">
 
   <div class="left eight columns alpha" data-hook="admin_banner_box_form_left">
+
+    <%= f.field_container :banner_type do %>
+      <%= f.radio_button(:banner_type, 'photo', class: 'banner_type') %>
+      <%= f.label(:banner_type_photo, "It's a photo") %>
+      <%= f.radio_button(:banner_type, 'text', class: 'banner_type') %>
+      <%= f.label(:banner_type_text, "It's a text and button") %>
+      <%= f.error_message_on :banner_type %>
+    <% end %>
+
+    <div style='display:none'>
     <%= f.field_container :category do %>
       <%= f.label :category, raw(t(:category) + content_tag(:span, ' *', :class => 'required')) %>
       <%= f.text_field :category, :class => 'fullwidth title' %>
       <%= f.error_message_on :category %>
     <% end %>
+    </div>
 
     <%= f.field_container :url do %>
       <%= f.label :url, raw(t(:url)) %>
       <%= f.text_field :url, :class => 'fullwidth title' %>
       <%= f.error_message_on :url %>
     <% end %>
+
+    <div id= 'banner_text_fields' <%= visible_div(@banner_box.banner_type, 'photo')%>">
+      <%= f.field_container :text_button do %>
+        <%= f.label :text_button, raw(t(:text_button)) %>
+        <%= f.text_field :text_button, :class => 'fullwidth title' %>
+        <%= f.error_message_on :text_button %>
+      <% end %>
+
+      <%= f.field_container :bg_color do %>
+        <%= f.label :bg_color, raw(t(:bg_color)) %>
+        <%= f.text_field :bg_color, :class => 'fullwidth title' %>
+        <%= f.error_message_on :bg_color %>
+      <% end %>
+
+      <%= f.field_container :text_color do %>
+        <%= f.label :text_color, raw(t(:text_color)) %>
+        <%= f.text_field :text_color, :class => 'fullwidth title' %>
+        <%= f.error_message_on :text_color %>
+      <% end %>
+
+      <%= f.field_container :text_lines do %>
+        <%= f.label :text_lines, raw(t(:text_lines)) %>
+        <%= f.text_area :text_lines, :class => 'fullwidth title' %>
+        <%= f.error_message_on :text_lines %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="right eight columns omega" data-hook="admin_banner_box_form_right">
+  <div class="right eight columns omega" <%= visible_div(@banner_box.banner_type, 'text')%> id='banner_photo_fields' data-hook="admin_banner_box_form_right">
     <% unless f.object.new_record? %>
       <div data-hook="thumbnail" class="field alpha two columns">
         <%= f.label t(:thumbnail) %><br>
@@ -40,6 +77,7 @@
       <%= f.check_box :enabled %>
       <%= f.error_message_on :enabled %>
     <% end %>
+
   </div>
 
   <div class="clear"></div>
@@ -48,3 +86,14 @@
 
   <div class="clear"></div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $('.banner_type').click(function() {
+    var option = $(this).val();
+    $("#banner_photo_fields, #banner_text_fields").hide();
+    $("#banner_"+ option + "_fields").show();
+  });
+});
+</script>
+

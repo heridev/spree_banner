@@ -34,6 +34,62 @@ module Spree
 
     def insert_banner_box_by_name name, style
       banner = Spree::BannerBox.find_by_category_name(name)
+      if banner && banner.banner_type
+        send("banner_type_#{banner.banner_type}", banner, style)
+      end
+    end
+
+    def get_color_banner name
+      banner = Spree::BannerBox.find_by_category_name(name)
+      banner.bg_color
+    end
+
+    def visible_div banner_type, type
+      "style='display: none'".html_safe if banner_type == type
+    end
+
+    def insert_banner_box_by_name_test name, style
+      banner = Spree::BannerBox.find_by_category_name(name)
+      if banner && banner.banner_type
+        send("banner_type_#{banner.banner_type}", banner, style)
+      end
+    end
+
+    def banner_type_text banner, style
+      text_button = banner.text_button
+
+      style, hr_element, lines = select_banner_size banner, style
+
+      content_tag(:div, class: 'text-banner', style: style) do
+        lines.each_with_index do |line, index|
+          concat content_tag(:p, line, class: "line-number-#{index + 1}")
+        end
+        concat hr_element
+        concat link_to text_button,
+          banner.url, class: 'custom-button' if text_button && text_button != ''
+      end
+    end
+
+    def select_banner_size banner, size
+      text_color = banner.text_color != '' && banner.text_color || '000000'
+      lines = (banner.text_lines && banner.text_lines.split("\r\n")) || ['', '', '']
+      hr_element = ''
+      style = ''
+
+      case size
+      when 'small'
+        style = "width: 323px; height: 160px; background: ##{banner.bg_color}; color: ##{text_color}; padding-top: 63px;"
+      when 'medium'
+        style = "width: 323px; height: 320px; background: ##{banner.bg_color}; color: ##{text_color}"
+        hr_element = content_tag(:hr) if lines[0] != ''
+      else
+        style = "width: 323px; height: 320px; background: ##{banner.bg_color}; color: ##{text_color}"
+      end
+
+      return style, hr_element, lines
+    end
+
+    def banner_type_photo banner, style
       link_to (banner.url.blank? ? "javascript: void(0)" : banner.url) do
         src = banner.attachment.url(style.to_sym)
         image_tag(banner.attachment.url(style.to_sym), :alt => banner.alt_text.presence || image_alt(src))
