@@ -41,7 +41,7 @@ module Spree
 
     def get_color_banner name
       banner = Spree::BannerBox.find_by_category_name(name)
-      banner.bg_color
+      banner && banner.bg_color
     end
 
     def visible_div banner_type, type
