@@ -48,13 +48,13 @@ module Spree
       "style='display: none'".html_safe if banner_type == type
     end
 
-    def banner_type_text banner, style
+    def banner_type_text banner, size
       text_button = banner.text_button != '' && banner.text_button
       text_color = banner.text_color != '' && banner.text_color || '000000'
 
-      style, hr_element, lines = select_banner_size banner, style
+      style, hr_element, lines = select_banner_size banner, size
 
-      content_tag(:div, class: 'text-banner', style: style) do
+      content_tag(:div, class: "text-banner #{size}", style: style) do
         lines.each_with_index do |line, index|
           concat content_tag(:p, line, class: "line-number-#{index + 1}")
         end
