@@ -44,6 +44,11 @@ module Spree
       banner && banner.bg_color != '' && banner.bg_color || 'FCFCFC'
     end
 
+    def get_banner_link name
+      banner = Spree::BannerBox.find_by_category_name(name)
+      banner.try(:url)
+    end
+
     def visible_div banner_type, type
       "style='display: none'".html_safe if banner_type == type
     end
@@ -74,7 +79,7 @@ module Spree
 
       case size
       when 'small'
-        style = "width: 323px; height: 160px; background: ##{bg_color}; color: ##{text_color}; padding-top: 63px;"
+        style = "width: 320px; height: 160px; background: ##{bg_color}; color: ##{text_color}; padding-top: 63px;"
       when 'medium'
         style = "width: 320px; height: 321px; background: ##{bg_color}; color: ##{text_color}"
         hr_element = content_tag(:hr) if lines[0] != ''
