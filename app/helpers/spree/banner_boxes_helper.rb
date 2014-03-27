@@ -41,22 +41,16 @@ module Spree
 
     def get_color_banner name
       banner = Spree::BannerBox.find_by_category_name(name)
-      banner && banner.bg_color
+      banner && banner.bg_color != '' && banner.bg_color || 'FCFCFC'
     end
 
     def visible_div banner_type, type
       "style='display: none'".html_safe if banner_type == type
     end
 
-    def insert_banner_box_by_name_test name, style
-      banner = Spree::BannerBox.find_by_category_name(name)
-      if banner && banner.banner_type
-        send("banner_type_#{banner.banner_type}", banner, style)
-      end
-    end
-
     def banner_type_text banner, style
-      text_button = banner.text_button
+      text_button = banner.text_button != '' && banner.text_button
+      text_color = banner.text_color != '' && banner.text_color || '000000'
 
       style, hr_element, lines = select_banner_size banner, style
 
@@ -66,11 +60,13 @@ module Spree
         end
         concat hr_element
         concat link_to text_button,
-          banner.url, class: 'custom-button' if text_button && text_button != ''
+          banner.url, class: 'custom-button',
+          style: "border: 1px solid ##{text_color}; color: ##{text_color};" if text_button
       end
     end
 
     def select_banner_size banner, size
+      bg_color = banner.bg_color != '' && banner.bg_color || 'FCFCFC'
       text_color = banner.text_color != '' && banner.text_color || '000000'
       lines = (banner.text_lines && banner.text_lines.split("\r\n")) || ['', '', '']
       hr_element = ''
@@ -78,12 +74,12 @@ module Spree
 
       case size
       when 'small'
-        style = "width: 323px; height: 160px; background: ##{banner.bg_color}; color: ##{text_color}; padding-top: 63px;"
+        style = "width: 323px; height: 160px; background: ##{bg_color}; color: ##{text_color}; padding-top: 63px;"
       when 'medium'
-        style = "width: 323px; height: 320px; background: ##{banner.bg_color}; color: ##{text_color}"
+        style = "width: 320px; height: 321px; background: ##{bg_color}; color: ##{text_color}"
         hr_element = content_tag(:hr) if lines[0] != ''
       else
-        style = "width: 323px; height: 320px; background: ##{banner.bg_color}; color: ##{text_color}"
+        style = "width: 323px; height: 320px; background: ##{bg_color}; color: ##{text_color}"
       end
 
       return style, hr_element, lines
