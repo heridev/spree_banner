@@ -79,9 +79,9 @@ module Spree
 
       case size
       when 'small'
-        style = "width: 320px; height: 160px; background: ##{bg_color}; color: ##{text_color}; padding-top: 63px;"
+        style = "width: 100%; height: 100%; position: absolute; background: ##{bg_color}; color: ##{text_color}; padding-top: 63px;"
       when 'medium'
-        style = "width: 320px; height: 321px; background: ##{bg_color}; color: ##{text_color}"
+        style = "width: 50%; height: 100%; position:absolute; background: ##{bg_color}; color: ##{text_color}"
         hr_element = content_tag(:hr) if lines[0] != ''
       else
         style = "width: 323px; height: 320px; background: ##{bg_color}; color: ##{text_color}"
