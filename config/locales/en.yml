@@ -19,6 +19,7 @@ en:
   text_lines: 'Add the text lines one per line'
   bg_color: "Add the background color eg: 1CD6CD visit <a href='http://colorpicker.com' target='_blank'>http://colorpicker.com</a>"
   text_color: "Add the text color eg: 1CD6CD visit <a href='http://colorpicker.com' target='_blank'>http://colorpicker.com</a>"
+  hover_color: "Add the hover color eg: 1CD6CD visit <a href='http://colorpicker.com' target='_blank'>http://colorpicker.com</a>"
   url: Link url
   attachment: Attachment
   category: Category

@@ -41,7 +41,7 @@ module Spree
 
     def get_color_banner name
       banner = Spree::BannerBox.find_by_category_name(name)
-      banner && banner.bg_color != '' && banner.bg_color || 'FCFCFC'
+      banner && banner.hover_color != '' && banner.hover_color || 'FCFCFC'
     end
 
     def get_banner_link name

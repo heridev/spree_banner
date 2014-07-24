@@ -24,6 +24,12 @@
       <%= f.error_message_on :url %>
     <% end %>
 
+    <%= f.field_container :hover_color do %>
+      <%= f.label :hover_color, raw(t(:hover_color)) %><br />
+      <%= f.text_field :hover_color, :class => 'fullwidth title' %>
+      <%= f.error_message_on :hover_color %>
+    <% end %>
+
     <div id= 'banner_text_fields' <%= visible_div(@banner_box.banner_type, 'photo')%>">
       <%= f.field_container :text_button do %>
         <%= f.label :text_button, raw(t(:text_button)) %>
@@ -77,7 +83,6 @@
       <%= f.check_box :enabled %>
       <%= f.error_message_on :enabled %>
     <% end %>
-
   </div>
 
   <div class="clear"></div>
