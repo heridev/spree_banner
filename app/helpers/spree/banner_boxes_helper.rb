@@ -49,6 +49,11 @@ module Spree
       banner.try(:url)
     end
 
+    def get_description name
+      banner = Spree::BannerBox.find_by_category_name(name)
+      banner.try(:text_lines)
+    end
+
     def visible_div banner_type, type
       "style='display: none'".html_safe if banner_type == type
     end

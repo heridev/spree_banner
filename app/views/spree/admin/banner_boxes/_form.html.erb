@@ -30,6 +30,12 @@
       <%= f.error_message_on :hover_color %>
     <% end %>
 
+    <%= f.field_container :text_lines do %>
+      <%= f.label :text_lines, raw(t(:text_lines)) %>
+      <%= f.text_area :text_lines, :class => 'fullwidth title' %>
+      <%= f.error_message_on :text_lines %>
+    <% end %>
+
     <div id= 'banner_text_fields' <%= visible_div(@banner_box.banner_type, 'photo')%>">
       <%= f.field_container :text_button do %>
         <%= f.label :text_button, raw(t(:text_button)) %>
@@ -49,11 +55,6 @@
         <%= f.error_message_on :text_color %>
       <% end %>
 
-      <%= f.field_container :text_lines do %>
-        <%= f.label :text_lines, raw(t(:text_lines)) %>
-        <%= f.text_area :text_lines, :class => 'fullwidth title' %>
-        <%= f.error_message_on :text_lines %>
-      <% end %>
     </div>
   </div>
 
